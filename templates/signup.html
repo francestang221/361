@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <title>Sign up</title>
+{%  extends 'layout.html' %}
 
-</head>
-<body>
-    <section>
-        <h1>Reddit Mood Checker</h1>
-        <h2> Sign up</h2>
-    </section>
+{% block button %}
+    <a href="{{ url_for('index')}}"> Home </a>
+{% endblock %}
 
-</body>
-</html>
+{%  block content %}
+    <h2> Sign Up </h2>
+    <h3> Username: </h3>
+    <h3> Password: </h3>
+    <h3> Register </h3>
+{% endblock %}

@@ -15,7 +15,12 @@ def register():
 
 @app.route('/mood')
 def mood():
-    return 'Welcome to Reddit Mood Checker!'
+    return  render_template('mood.html')
+
+
+@app.route('/searches')
+def searches():
+    return render_template('searches.html')
 
 
 if __name__ == '__main__':

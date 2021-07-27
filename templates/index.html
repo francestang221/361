@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/styles.css">
+{%  extends 'layout.html' %}
 
-    <title>Reddit Mood Checker</title>
-</head>
+{% block button %}
+    <a href="{{ url_for('mood')}}"> Mood Checker </a>
+{% endblock %}
 
-<body>
-    <section>
-        <h1>Reddit Mood Checker</h1>
-        <h2> Hello, welcome to Reddit Mood Checker</h2>
-        <a href="{{ url_for('register')}}"> Sign up</a>
+{%  block content %}
+    <h2> Hello, welcome to Reddit Mood Checker</h2>
+    <a href="{{ url_for('register')}}"> Sign up</a>
+{% endblock %}
 
-    </section>
-</body>
-
-</html>

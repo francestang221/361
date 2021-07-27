@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <title> Reddit Mood Checker </title>
-</head>
-<body>
+{%  extends 'layout.html' %}
 
-</body>
-</html>
+{% block button %}
+    <a href="{{ url_for('searches')}}"> View Your Saved Searches </a>
+{% endblock %}
+
+{%  block content %}
+    <h2> Enter a subreddit and a keyword here :) </h2>
+{% endblock %}
