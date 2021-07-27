@@ -5,5 +5,15 @@
 {% endblock %}
 
 {%  block content %}
-    <h2> Enter a subreddit and a keyword here :) </h2>
+    <section id="form">
+        <form action="{{ url_for('mood')}}" method="POST">
+            <label for="subreddit">Subreddit: </label>
+            <input id="subreddit" name="subreddit" type="text" placeholder="OSUOnlineCS">
+
+            <label for="keyword">Keyword: </label>
+            <input id="keyword" name="keyword" type="text" placeholder="CS 225">
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
 {% endblock %}
