@@ -1,7 +1,7 @@
-from flask import (Flask, render_template,
+from flask import (render_template,
                    url_for, request)
 
-app = Flask(__name__)
+from models import db, Customer, app
 
 
 @app.route('/')
