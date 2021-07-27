@@ -8,6 +8,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/register')
+def register():
+    return render_template('signup.html')
+
+
 @app.route('/mood')
 def mood():
     return 'Welcome to Reddit Mood Checker!'
