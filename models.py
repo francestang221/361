@@ -1,9 +1,9 @@
+import datetime
+from sqlalchemy.exc import IntegrityError
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import datetime
 from flask_login import UserMixin
-
-# UserMixin: is_anonymous: return True for guest users
+from flask_bcrypt import generate_password_hash
 
 app = Flask(__name__)
 
@@ -18,6 +18,19 @@ class Customer(UserMixin, db.Model):
     email = db.Column('Email', db.String(120), unique=True, nullable=False)
     password = db.Column('Password', db.String(120), unique=False, nullable=False)
     created = db.Column('Created', db.DateTime, default=datetime.datetime.now)
+
+    class Meta:
+        database = db
+        order_by = ('-created',)
+
+    @classmethod
+    def create_user(cls, username, email, password):
+        try:
+            cls.create(username=username,
+                       email=email,
+                       password=generate_password_hash(password))
+        except IntegrityError:
+            raise ValueError('User already exists')
 
     def __repr__(self):
         return f'''<Customer (Username: {self.username}

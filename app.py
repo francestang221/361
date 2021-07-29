@@ -1,7 +1,20 @@
-from flask import (render_template, redirect,
-                   url_for, request)
+from flask import (g, render_template, redirect,
+                   url_for, request, flash)
 
 from models import db, Customer, app
+
+
+@app.before_request
+def before_request():
+    """Connect to the database before each request"""
+    g.db = db
+    g.db.engine.connect()
+
+
+@app.after_request
+def after_request(response):
+    """Close the database connection after each request"""
+
 
 
 @app.route('/')
@@ -11,15 +24,10 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    flash('Please register or login.')
     if request.form:
         print(request.form)
         # create a new User object
-        new_user = Customer(email=request.form['email'],
-                            username=request.form['username'],
-                            password=request.form['password'])
-
-        db.session.add(new_user)
-        db.session.commit()
         return redirect(url_for('index'))
     return render_template('signup.html')
 
@@ -36,5 +44,8 @@ def searches():
 
 
 if __name__ == '__main__':
+    app.secret_key = 'secret'
     db.create_all()
-    app.run(debug=True)
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.debug = True
+    app.run()
