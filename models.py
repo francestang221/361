@@ -1,6 +1,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+from flask_login import UserMixin
+
+# UserMixin: is_anonymous: return True for guest users
 
 app = Flask(__name__)
 
@@ -9,7 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///customers.db'
 db = SQLAlchemy(app)
 
 
-class Customer(db.Model):
+class Customer(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column('Username', db.String(80), unique=True, nullable=False)
     email = db.Column('Email', db.String(120), unique=True, nullable=False)
@@ -21,3 +24,6 @@ class Customer(db.Model):
                 Email: {self.email}
                 Password: {self.password})>
                 '''
+
+# create a Model for Searches: sub + keyword
+

@@ -1,4 +1,4 @@
-from flask import (render_template,
+from flask import (render_template, redirect,
                    url_for, request)
 
 from models import db, Customer, app
@@ -11,7 +11,16 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    print(request.form)
+    if request.form:
+        print(request.form)
+        # create a new User object
+        new_user = Customer(email=request.form['email'],
+                            username=request.form['username'],
+                            password=request.form['password'])
+
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('index'))
     return render_template('signup.html')
 
 
@@ -27,4 +36,5 @@ def searches():
 
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(debug=True)

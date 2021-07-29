@@ -15,6 +15,11 @@
             {%  block button %}
             {% endblock %}
         </section>
+        <nav>
+            <a href="{{ url_for('index')}}"><ul>Home</ul> </a>
+            <a href="{{ url_for('searches')}}"> <ul>View My Saved Searches </ul></a>
+            <a href="{{ url_for('index')}}"> <ul> Log out </ul> </a>
+        </nav>
 
         {%  block content %}
         {%  endblock %}
