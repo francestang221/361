@@ -13,3 +13,4 @@ setuptools~=57.0.0
 pip~=21.2.1
 peewee~=3.14.4
 WTForms~=2.3.3
+flask-restful~=0.3.9
