@@ -28,7 +28,18 @@ class User(UserMixin, Model):
             raise ValueError('User already exists')
 
 
+# for Save my Search / View My Saved Searches
+class Search(Model):
+    user_id = ForeignKeyField(User, related_name='search_set')
+    subreddit = CharField()
+    keyword = CharField
+    created_at = DateTimeField(default=datetime.datetime.now)
+
+    class Meta:
+        database = DATABASE
+
+
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User], safe=True)
+    DATABASE.create_tables([User, Search], safe=True)
     DATABASE.close()
