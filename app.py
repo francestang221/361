@@ -1,35 +1,55 @@
-from flask import (g, render_template, redirect,
-                   url_for, request, flash)
+from flask import Flask, g, render_template, flash, redirect, url_for, request
+from flask_login import LoginManager
+import forms
+import models
 
-from models import db, Customer, app
+DEBUG = True
+PORT = 8000
+HOST = '0.0.0.0'
+
+app = Flask(__name__)
+app.secret_key = 'secret'
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+
+@login_manager.user_loader
+def load_user(userid):
+    try:
+        return models.User.get(models.User.id == userid)
+    except models.DoesNotExist:
+        return None
 
 
 @app.before_request
 def before_request():
-    """Connect to the database before each request"""
-    g.db = db
-    g.db.engine.connect()
+    """Connect to the database before each request """
+    g.db = models.DATABASE
+    g.db.connect()
 
 
 @app.after_request
 def after_request(response):
     """Close the database connection after each request"""
+    g.db.close()
+    return response
 
 
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/register', methods=['GET', 'POST'])
+# Views
+@app.route('/register', methods=('GET', 'POST'))
 def register():
-    flash('Please register or login.')
-    if request.form:
-        print(request.form)
-        # create a new User object
-        return redirect(url_for('index'))
-    return render_template('signup.html')
+    form = forms.RegisterForm()
+    if form.validate_on_submit():
+        flash("Yay, you registered!", "success")
+        models.User.create_user(
+            username=form.username.data,
+            email=form.email.data,
+            password=form.password.data
+        )
+        return redirect(url_for('index2'))
+    return render_template('register.html', form=form)
 
 
 @app.route('/mood', methods=['GET', 'POST'])
@@ -38,14 +58,20 @@ def mood():
     return render_template('mood.html')
 
 
-@app.route('/searches')
-def searches():
-    return render_template('searches.html')
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
-    app.secret_key = 'secret'
-    db.create_all()
-    app.config['SESSION_TYPE'] = 'filesystem'
-    app.debug = True
-    app.run()
+    models.initialize()
+    try:
+        models.User.create_user(
+            username='frances',
+            email='frances@goog.com',
+            password='password',
+            admin=True
+        )
+    except ValueError:
+        pass
+    app.run(DEBUG=DEBUG, host=HOST, port=PORT)

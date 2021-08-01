@@ -16,9 +16,7 @@
             {% endblock %}
         </section>
         <nav>
-           <ul>Home</ul>
-            <ul>View My Saved Searches </ul>
-            <ul> Log out </ul>
+            <a href="{{ url_for('index')}}"><ul>Home</ul></a>
         </nav>
 
         {%  block content %}

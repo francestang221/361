@@ -1,42 +1,45 @@
+from peewee import *
 import datetime
-from sqlalchemy.exc import IntegrityError
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
 
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///customers.db'
-db = SQLAlchemy(app)
+DATABASE = SqliteDatabase('user.db')
 
 
-class Customer(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column('Username', db.String(80), unique=True, nullable=False)
-    email = db.Column('Email', db.String(120), unique=True, nullable=False)
-    password = db.Column('Password', db.String(120), unique=False, nullable=False)
-    created = db.Column('Created', db.DateTime, default=datetime.datetime.now)
+class User(UserMixin, Model):
+    username = CharField(unique=True)
+    email = CharField(unique=True)
+    password = CharField(max_length=100)
+    joined_at = DateTimeField(default=datetime.datetime.now)
+    is_admin = BooleanField(default=False)
 
     class Meta:
-        database = db
-        order_by = ('-created',)
+        database = DATABASE
+        order_by = ('-joined_at',)
 
     @classmethod
-    def create_user(cls, username, email, password):
+    def create_user(cls, username, email, password, admin=False):
         try:
             cls.create(username=username,
                        email=email,
-                       password=generate_password_hash(password))
+                       password=generate_password_hash(password),
+                       is_admin=admin)
         except IntegrityError:
             raise ValueError('User already exists')
 
-    def __repr__(self):
-        return f'''<Customer (Username: {self.username}
-                Email: {self.email}
-                Password: {self.password})>
-                '''
 
-# create a Model for Searches: sub + keyword
+# for Save my Search / View My Saved Searches
+class Search(Model):
+    user_id = ForeignKeyField(User, related_name='search_set')
+    subreddit = CharField()
+    keyword = CharField
+    created_at = DateTimeField(default=datetime.datetime.now)
 
+    class Meta:
+        database = DATABASE
+
+
+def initialize():
+    DATABASE.connect()
+    DATABASE.create_tables([User, Search], safe=True)
+    DATABASE.close()

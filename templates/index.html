@@ -2,22 +2,6 @@
 
 {%  block content %}
     <h3> Hello, welcome to Reddit Mood Checker</h3>
-        <section id="form">
-            <form action="{{ url_for('mood')}}" method="POST">
-                <label for="username">username </label>
-                <input id="username" name="username" type="text">
-
-                <label for="">password </label>
-                <input id="password" name="password" type="password">
-
-             <button type="submit">Log In</button>
-             </form>
-        </section>
-
-        <section id="new_user">
-            <p>Don't have an account yet?</p>
-            <a href="{{ url_for('register')}}"> Sign up</a>
-            <a href="{{ url_for('mood')}}"> Guest </a>
-        </section>
+    <a href="{{ url_for('register')}}"> Sign up</a>
+    <a href="{{ url_for('mood')}}">Guest Mode</a>
 {% endblock %}
-
