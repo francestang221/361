@@ -56,18 +56,16 @@ def register():
 # WIP
 @app.route('/mood', methods=['GET', 'POST'])
 def mood():
-    print(request.form)
-    # when the user submit:
-    # subreddit = user submitted subreddit
-    # topic = user submitted topic
-    res = RedditScraper.reddit_scraper('OSUOnlineCS', 'CS 225')
-    '''
-    '''
-
-    # user click get the sentiment result
-    # return mood
-    mood='analytical'
-    return render_template('mood.html', res=res, mood=mood)
+    form = forms.RedditForm()
+    if form.validate_on_submit():
+        subreddit = form.subreddit.data
+        topic = form.topic.data
+        # WIP: need to display in a scroll box
+        res = RedditScraper.reddit_scraper(subreddit, topic)
+        # get the mood result
+        mood = "happy"
+        return render_template('mood.html', res=res, mood=mood,form=form)
+    return render_template('mood.html', form=form)
 
 
 @app.route('/searches')

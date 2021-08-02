@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 def get_reddit(subreddit, topic):
@@ -20,15 +21,14 @@ def reddit_scraper(subreddit, topic):
     r = get_reddit(subreddit, topic)
     dict1 = r['data']['children']
     n = 1
-    num_of_posts = 5
-    if len(dict1) < 5:
-        num_of_posts = len(dict1)
+    result = {"text": ""}
+    num_of_posts = len(dict1)
     for i in range(num_of_posts):
         dict2 = dict1[i]
         if dict2['data']['selftext'] != "":
             print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-            print('# {}:'.format(n), dict2['data']['title'])
-            print("link to post: ", dict2['data']['permalink'])
-            print(dict2['data']['selftext'])
+            result['text'] += "# {}:".format(n) + dict2['data']['title']
+            # result += "link to post: " + dict2['data']['permalink']
+            result['text'] += dict2['data']['selftext']
             n += 1
-    return 'I love pizza'   # will return a Dictionary of posts
+    return json.dumps(result)

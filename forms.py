@@ -46,3 +46,13 @@ class RegisterForm(FlaskForm):
         'Confirm Password',
         validators=[DataRequired()]
     )
+
+
+class RedditForm(FlaskForm):
+    subreddit = StringField(
+        'Subreddit',
+        validators=[DataRequired()])
+
+    topic = StringField(
+        'Topic',
+        validators=[DataRequired()])
