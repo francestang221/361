@@ -1,7 +1,7 @@
 {%  extends 'layout.html' %}
 
 {%  block content %}
-    <section id="form" class="text-center">
+    <section id="form2" class="text-center">
         <br>
         <p>Enter an existing Subreddit and the topic you are interested in.</p>
         <form action="{{ url_for('mood')}}" method="POST">
@@ -21,9 +21,18 @@
         <br>
         <h3>Search Result</h3>
         <!-- Text Box of Text, with scrollbar -->
+        {{ res }}
         <br>
         <br>
-         <button type="submit">Get the sentiment analysis results </button>
+
+        <form action="{{ url_for('mood')}}" method="POST">
+            <button type="submit">Get the sentiment analysis results </button>
+        </form>
+        <br>
+        <br>
+        <h4>Sentiment Analysis Result</h4>
+        {{ mood }}
+        <br>
     </section>
 
 {% endblock %}

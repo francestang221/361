@@ -2,6 +2,7 @@ from flask import Flask, g, render_template, flash, redirect, url_for, request
 from flask_login import LoginManager
 import forms
 import models
+import RedditScraper
 
 DEBUG = True
 PORT = 8000
@@ -52,15 +53,27 @@ def register():
     return render_template('register.html', form=form)
 
 
+# WIP
 @app.route('/mood', methods=['GET', 'POST'])
 def mood():
     print(request.form)
-    return render_template('mood.html')
+    # when the user submit:
+    # subreddit = user submitted subreddit
+    # topic = user submitted topic
+    res = RedditScraper.reddit_scraper('OSUOnlineCS', 'CS 225')
+    '''
+    '''
+
+    # user click get the sentiment result
+    # return mood
+    mood='analytical'
+    return render_template('mood.html', res=res, mood=mood)
 
 
 @app.route('/searches')
 def view_searches():
     return render_template('searches.html')
+
 
 @app.route('/')
 def index():
