@@ -3,6 +3,7 @@ from flask_login import LoginManager
 import forms
 import models
 import RedditScraper
+import requests
 
 DEBUG = True
 PORT = 8000
@@ -61,10 +62,12 @@ def mood():
         subreddit = form.subreddit.data
         topic = form.topic.data
         # WIP: need to display in a scroll box
-        res = RedditScraper.reddit_scraper(subreddit, topic)
+        data = RedditScraper.reddit_scraper(subreddit, topic)
         # get the mood result
-        mood = "happy"
-        return render_template('mood.html', res=res, mood=mood,form=form)
+        mood_url = "https://cs361-sentiment.herokuapp.com/tones"
+        response = requests.post(mood_url, data=data)
+        mood = response.content
+        return render_template('mood.html', res=data, mood=mood, form=form)
     return render_template('mood.html', form=form)
 
 

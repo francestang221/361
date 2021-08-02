@@ -2,30 +2,12 @@
 {% from '_formhelpers.html' import render_field %}
 
 {%  block content %}
-     <!--
-    <section id="form2" class="text-center">
-        <br>
-        <p>Enter an existing Subreddit and the topic you are interested in.</p>
-        <form action="{{ url_for('mood')}}" method="POST">
-            <label for="subreddit">Subreddit </label>
-            <input id="subreddit" name="subreddit" type="text" placeholder="OSUOnlineCS">
-            <br>
-            <br>
-            <label for="keyword">Keyword </label>
-            <input id="keyword" name="keyword" type="text" placeholder="CS 225">
-            <br>
-            <br>
-            <button type="submit">Get the mos recent posts </button>
-        </form>
-    </section>
-    -->
-
     <section class="text-center">
         <form method="POST" action="" class="form">
             {% for field in form %}
             {{ render_field(field) }}
             {% endfor %}
-        <button type="submit" id="submit">Get the most recent posts</button>
+        <button type="submit" id="submit">Get my results </button>
         </form>
     </section>
 
@@ -33,17 +15,15 @@
         <br>
         <h3>Search Result</h3>
         <!-- Text Box of Text, with scrollbar -->
-        {{ res }}
-        <br>
-        <br>
-
-        <form action="{{ url_for('mood')}}" method="POST">
-            <button type="submit">Get the sentiment analysis results </button>
-        </form>
+        <div class="d-flex justify-content-center">
+            <div style="height:200px;width:500px;border:1px solid #ccc;overflow:auto;">
+                {{ res }}
+            </div>
+        </div>
         <br>
         <br>
         <h4>Sentiment Analysis Result</h4>
-        {{ mood }}
+                {{ mood }}
         <br>
     </section>
 
