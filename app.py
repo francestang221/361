@@ -58,6 +58,10 @@ def mood():
     return render_template('mood.html')
 
 
+@app.route('/searches')
+def view_searches():
+    return render_template('searches.html')
+
 @app.route('/')
 def index():
     return render_template('index.html')

@@ -1,15 +1,29 @@
 {%  extends 'layout.html' %}
 
 {%  block content %}
-    <section id="form">
+    <section id="form" class="text-center">
+        <br>
+        <p>Enter an existing Subreddit and the topic you are interested in.</p>
         <form action="{{ url_for('mood')}}" method="POST">
-            <label for="subreddit">Subreddit: </label>
+            <label for="subreddit">Subreddit </label>
             <input id="subreddit" name="subreddit" type="text" placeholder="OSUOnlineCS">
-
-            <label for="keyword">Keyword: </label>
+            <br>
+            <br>
+            <label for="keyword">Keyword </label>
             <input id="keyword" name="keyword" type="text" placeholder="CS 225">
-
-            <button type="submit">Submit</button>
+            <br>
+            <br>
+            <button type="submit">Get the mos recent posts </button>
         </form>
     </section>
+
+    <section id="result" class="text-center">
+        <br>
+        <h3>Search Result</h3>
+        <!-- Text Box of Text, with scrollbar -->
+        <br>
+        <br>
+         <button type="submit">Get the sentiment analysis results </button>
+    </section>
+
 {% endblock %}
