@@ -1,9 +1,10 @@
-from flask import Flask, g, render_template, flash, redirect, url_for, request
 from flask_login import LoginManager
-import forms
-import models
 import RedditScraper
+import forms
+import json
+import models
 import requests
+from flask import Flask, g, render_template, flash, redirect, url_for
 
 DEBUG = True
 PORT = 8000
@@ -63,11 +64,12 @@ def mood():
         topic = form.topic.data
         # WIP: need to display in a scroll box
         data = RedditScraper.reddit_scraper(subreddit, topic)
+        display_data = json.loads(data)['text']
         # get the mood result
         mood_url = "https://cs361-sentiment.herokuapp.com/tones"
         response = requests.post(mood_url, data=data)
-        mood = response.content
-        return render_template('mood.html', res=data, mood=mood, form=form)
+        sentiments = json.loads(response.content)
+        return render_template('mood.html', data=display_data, sentiments=sentiments, form=form)
     return render_template('mood.html', form=form)
 
 

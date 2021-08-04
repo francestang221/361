@@ -29,6 +29,6 @@ def reddit_scraper(subreddit, topic):
         dict2 = dict1[i]
         result['text'] += "# {}:".format(n) + dict2['data']['title']
         # result += "link to post: " + dict2['data']['permalink']
-        result['text'] += dict2['data']['selftext']
+        result['text'] += ' ' + dict2['data']['selftext']
         n += 1
     return json.dumps(result)

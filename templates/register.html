@@ -4,7 +4,7 @@
 
 {%  block content %}
     <section class="text-center">
-        <form method="POST" action="" class="form">
+        <form method="POST" action="{{ url_for('mood')}}" class="form">
             <!-- {{ form.hidden_tag() }} hidden tags will not show -->
             {% for field in form %}
             {{ render_field(field) }}
