@@ -6,6 +6,7 @@ peewee==3.14.4
 requests==2.26.0
 Werkzeug==2.0.1
 WTForms==2.3.3
+gunicorn
 
 pip~=21.2.1
 setuptools~=57.0.0
