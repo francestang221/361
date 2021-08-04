@@ -13,7 +13,6 @@ HOST = '0.0.0.0'
 app = Flask(__name__)
 app.secret_key = 'secret'
 
-""" comment out for mvp deployment
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -40,7 +39,7 @@ def after_request(response):
     g.db.close()
     return response
 
-"""
+
 
 # Views
 
