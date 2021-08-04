@@ -3,6 +3,8 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Regexp, Length, EqualTo
 
 
+# need to add email_exists
+
 class RegisterForm(FlaskForm):
     username = StringField(
         'Username',

@@ -1,10 +1,10 @@
 import json
-
 import requests
-
 import RedditScraper
 import forms
 from flask import Flask, render_template, flash
+
+import models
 
 DEBUG = True
 PORT = 8000
@@ -19,13 +19,12 @@ def register():
     form = forms.RegisterForm()
     if form.validate_on_submit():
         flash("Yay, you registered!", "success")
-        """
+
         models.User.create_user(
             username=form.username.data,
             email=form.email.data,
             password=form.password.data
         )
-        """
     return render_template('register.html', form=form)
 
 
@@ -58,4 +57,5 @@ def index():
 
 
 if __name__ == '__main__':
+    # initialize DB
     app.run()
