@@ -35,7 +35,6 @@ def mood():
     if form.validate_on_submit():
         subreddit = form.subreddit.data
         topic = form.topic.data
-        # WIP: need to display in a scroll box
         data = RedditScraper.reddit_scraper(subreddit, topic)
         display_data = json.loads(data)['text']
         # get the mood result
