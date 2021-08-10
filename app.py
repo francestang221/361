@@ -28,7 +28,6 @@ def register():
     return render_template('register.html', form=form)
 
 
-# WIP
 @app.route('/mood', methods=['GET', 'POST'])
 def mood():
     form = forms.RedditForm()
