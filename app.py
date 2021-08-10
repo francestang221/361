@@ -28,14 +28,12 @@ def register():
     return render_template('register.html', form=form)
 
 
-# WIP
 @app.route('/mood', methods=['GET', 'POST'])
 def mood():
     form = forms.RedditForm()
     if form.validate_on_submit():
         subreddit = form.subreddit.data
         topic = form.topic.data
-        # WIP: need to display in a scroll box
         data = RedditScraper.reddit_scraper(subreddit, topic)
         display_data = json.loads(data)['text']
         # get the mood result
