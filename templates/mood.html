@@ -5,10 +5,11 @@
     <section class="text-center">
         <p>Enter a subreddit and a topic (spaces allowed) to start.</p>
         <form method="POST" action="" class="form">
-            {% for field in form %}
-            {{ render_field(field) }}
-            {% endfor %}
-        <button type="submit" id="submit">Get my result </button>
+            <label for="subreddit">subreddit </label>
+            <input id="subreddit" name="subreddit" type="text">
+            <label for="topic">topic </label>
+            <input id="topic" name="topic" type="text">
+        <button type="submit" id="submit" class="btn btn-info">Get my result </button>
         </form>
     </section>
 
@@ -22,15 +23,13 @@
                 {{ data }}
             </div>
         </div>
-        <br>
-        <br>
-        <h4>Current Mood</h4>
+         <br>
+        <h3>Current Mood</h3>
             {% for mood in sentiments %}
                 {{ mood }}
             {% endfor %}
         <br>
-        <br>
-        <a target=”_blank” href="https://en.wikipedia.org/wiki/Sentiment_analysis">learn more</a>
+        <button class="btn btn-warning" id="learn">Learn More</button>
         <br>
     </section>
 

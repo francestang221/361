@@ -2,7 +2,7 @@ import json
 import requests
 import RedditScraper
 import forms
-from flask import Flask, render_template, flash
+from flask import Flask, render_template, flash, request
 
 import models
 
@@ -30,18 +30,17 @@ def register():
 
 @app.route('/mood', methods=['GET', 'POST'])
 def mood():
-    form = forms.RedditForm()
-    if form.validate_on_submit():
-        subreddit = form.subreddit.data
-        topic = form.topic.data
+    if request.method == "POST":
+        subreddit = request.form.get("subreddit")
+        topic = request.form.get("topic")
         data = RedditScraper.reddit_scraper(subreddit, topic)
         display_data = json.loads(data)['text']
         # get the mood result
         mood_url = "https://cs361-sentiment.herokuapp.com/tones"
         response = requests.post(mood_url, data=data)
         sentiments = json.loads(response.content)
-        return render_template('mood.html', data=display_data, sentiments=sentiments, form=form)
-    return render_template('mood.html', form=form)
+        return render_template('mood.html', data=display_data, sentiments=sentiments)
+    return render_template('mood.html')
 
 
 @app.route('/searches')

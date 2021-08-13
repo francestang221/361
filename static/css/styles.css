@@ -1,5 +1,7 @@
 * {
-    font-family: Verdana,Geneva,sans-serif;;
+    font-family: 'VT323', monospace;
+    font-size: x-large;
+    background-color: #faf9f9;
 }
 
 /* color palette
@@ -12,7 +14,7 @@ body {
 
 /* the Reddit orange*/
 h1 {
-    color: #FF4500
+    color: #FF4500;
 }
 
 header{
@@ -20,3 +22,6 @@ header{
     padding-bottom: 1.5em;
 }
 
+#title {
+    padding-bottom: 0.5em;
+  }
