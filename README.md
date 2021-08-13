@@ -5,4 +5,4 @@ A web app that helps reddit user to quickly get the sentiment of their favorite 
 Reddit Scraper API is part of this project: https://github.com/francestang221/RedditScraper
 
 
-![Alt Text](http://g.recordit.co/zwU0anJhWx.gif)
+![Alt Text](http://g.recordit.co/RpcBDYSNK3.gif)
