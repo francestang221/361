@@ -1,12 +1,8 @@
 import json
 import requests
 import RedditScraper
-import forms
-import werkzeug
-from werkzeug import exceptions
 from flask import Flask, render_template, flash, request
 
-import models
 
 DEBUG = True
 PORT = 8000
@@ -16,6 +12,7 @@ app = Flask(__name__)
 app.secret_key = 'secret'
 
 
+"""
 @app.route('/register', methods=('GET', 'POST'))
 def register():
     form = forms.RegisterForm()
@@ -28,6 +25,7 @@ def register():
             password=form.password.data
         )
     return render_template('register.html', form=form)
+"""
 
 
 @app.route('/mood', methods=['GET', 'POST'])
@@ -55,9 +53,11 @@ def mood():
     return render_template('mood.html')
 
 
+"""
 @app.route('/searches')
 def view_searches():
     return render_template('searches.html')
+"""
 
 
 @app.route('/resources')
