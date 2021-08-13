@@ -3,6 +3,7 @@
 
 {%  block content %}
     <section class="text-center">
+        <p>Enter a subreddit and a topic (spaces allowed) to start.</p>
         <form method="POST" action="" class="form">
             {% for field in form %}
             {{ render_field(field) }}
@@ -23,12 +24,13 @@
         </div>
         <br>
         <br>
-        <h4>Sentiment Analysis Result</h4>
-                {% for mood in sentiments %}
+        <h4>Current Mood</h4>
+            {% for mood in sentiments %}
                 {{ mood }}
-                {% endfor %}
+            {% endfor %}
         <br>
-        <a href="https://en.wikipedia.org/wiki/Sentiment_analysis">learn more</a>
+        <br>
+        <a target=”_blank” href="https://en.wikipedia.org/wiki/Sentiment_analysis">learn more</a>
         <br>
     </section>
 

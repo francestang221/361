@@ -1,8 +1,22 @@
 * {
-    font-family: 'Roboto', 'Arial', sans-serif;
+    font-family: Verdana,Geneva,sans-serif;;
 }
 
 /* color palette
 for new palettes: https://coolors.co/palettes/trending
 */
+
+body {
+    background-color: white;
+}
+
+/* the Reddit orange*/
+h1 {
+    color: #FF4500
+}
+
+header{
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
 
