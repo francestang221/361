@@ -42,6 +42,7 @@ def mood():
                 display_data = f"You didnt enter a topic for r/{subreddit}. "
             elif display_data == "":    # error 2: no result
                 display_data = "No results found :/"
+
             # get the mood result
             mood_url = "https://cs361-sentiment.herokuapp.com/tones"
             response = requests.post(mood_url, data=data)
