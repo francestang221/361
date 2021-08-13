@@ -24,13 +24,14 @@
         </div>
          <br>
         <h3>Current Mood</h3>
+            <section class="mood">
             {% for mood in sentiments %}
                 {{ mood }}
             {% endfor %}
+            </section>
         <br>
         <br>
         <button class="btn btn-warning" id="learn"><a href="{{ url_for('resources')}}">Learn More</a></button>
         <br>
-    </section>
 
 {% endblock %}

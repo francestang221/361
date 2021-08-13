@@ -13,7 +13,7 @@ body {
 }
 
 /* the Reddit orange*/
-h1 {
+h1, .mood {
     color: #FF4500;
 }
 
