@@ -3,12 +3,13 @@
 {%  block content %}
     <section class="text-center">
         <img src="../static/reddit.png">
-        <br>
+        <!-- WIP: for registered user only
          <a href="{{ url_for('mood')}}">Login</a>
         <p>Not a registered user yet?</p>
         <a href="{{ url_for('register')}}">Sign up</a>
         <br>
-         <a href="{{ url_for('mood')}}">Guest Mode</a>
+        -->
+         <button type="button" class="btn btn-info"><a href="{{ url_for('mood')}}">Enter as our guest</a></button>
     </section>
 
 {% endblock %}

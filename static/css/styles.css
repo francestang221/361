@@ -25,3 +25,14 @@ header{
 #title {
     padding-bottom: 0.5em;
   }
+
+button a {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+footer {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}

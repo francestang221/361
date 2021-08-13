@@ -2,6 +2,8 @@ import json
 import requests
 import RedditScraper
 import forms
+import werkzeug
+from werkzeug import exceptions
 from flask import Flask, render_template, flash, request
 
 import models
@@ -33,19 +35,33 @@ def mood():
     if request.method == "POST":
         subreddit = request.form.get("subreddit")
         topic = request.form.get("topic")
-        data = RedditScraper.reddit_scraper(subreddit, topic)
-        display_data = json.loads(data)['text']
-        # get the mood result
-        mood_url = "https://cs361-sentiment.herokuapp.com/tones"
-        response = requests.post(mood_url, data=data)
-        sentiments = json.loads(response.content)
-        return render_template('mood.html', data=display_data, sentiments=sentiments)
+        try:
+            data = RedditScraper.reddit_scraper(subreddit, topic)
+            display_data = json.loads(data)['text']
+            if topic == "":  # error 1: user didnt' enter topic
+                display_data = f"You didnt enter a topic for r/{subreddit}. "
+            elif display_data == "":    # error 2: no result
+                display_data = "No results found :/"
+            # get the mood result
+            mood_url = "https://cs361-sentiment.herokuapp.com/tones"
+            response = requests.post(mood_url, data=data)
+            sentiments = json.loads(response.content)
+            if len(sentiments) == 0:  # error 3: no sentiment
+                sentiments = ["*___*"]
+            return render_template('mood.html', data=display_data, sentiments=sentiments)
+        except KeyError:
+            return render_template('error.html')
     return render_template('mood.html')
 
 
 @app.route('/searches')
 def view_searches():
     return render_template('searches.html')
+
+
+@app.route('/resources')
+def resources():
+    return render_template('learn.html')
 
 
 @app.route('/')

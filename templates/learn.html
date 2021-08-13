@@ -1,0 +1,19 @@
+{%  extends 'layout.html' %}
+
+{%  block content %}
+
+    <section class="text-center">
+        <p> Here are some resources on Sentiment Analysis</p>
+        <img src="../static/cat.gif">
+        <br>
+        <a href="https://en.wikipedia.org/wiki/Sentiment_analysis" target="_blank">Wikipedia</a>
+        <br>
+        <a href="https://www.ibm.com/cloud/watson-natural-language-classifier" target="_blank">IBM Watson</a>
+        <br>
+        <a href="https://medium.com/manishmshiva/a-complete-guide-to-sentiment-analysis-and-its-applications-72adb3b057f5" target="_blank">Medium</a>
+        <br>
+        <br>
+        <button type="button" class="btn btn-warning"><a href="{{ url_for('mood')}}"> Go Back to Mood Checker</a></button>
+    </section>
+
+{% endblock %}
