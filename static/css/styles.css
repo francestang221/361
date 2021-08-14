@@ -32,6 +32,10 @@ button a {
     text-decoration: none;
 }
 
+.instructions{
+    text-shadow: 2px 2px #f0ad4e;
+}
+
 footer {
     padding-top: 1em;
     padding-bottom: 1em;
